@@ -13,6 +13,11 @@ module.exports = {
     release: true,
     releaseName: "Release ${version}",
     tokenRef: "GITHUB_TOKEN_RELEASE_IT",
+    releaseNotes(context) {
+      console.log(context);
+      const customNote = `### 🐳 Pull Docker image\n\`docker pull ${process.env.DOCKER_REGISTRY}/${process.env.DOCKER_REPO}/${process.env.DOCKER_IMAGE}:${context.version}\`\n\n`;
+      return customNote + context.changelog;
+    },
   },
   npm: false,
   plugins: {
